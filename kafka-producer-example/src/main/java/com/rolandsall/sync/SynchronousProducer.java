@@ -1,4 +1,4 @@
-package com.rolandsall;
+package com.rolandsall.sync;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class Producer {
+public class SynchronousProducer {
 
     private static final String BOOTSTRAP_SERVERS = "localhost:19092";
     private static final String TOPIC_NAME = "example-topic";
