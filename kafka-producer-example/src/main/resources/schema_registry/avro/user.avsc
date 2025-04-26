@@ -1,0 +1,10 @@
+{
+  "namespace": "com.rolandsall.schema_registry.avro",
+  "type": "record",
+  "name": "User",
+  "fields": [
+    {"name": "name", "type": "string"},
+    {"name": "age", "type": ["int", "null"]},
+    {"name": "email", "type": "string"}
+  ]
+}
