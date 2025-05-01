@@ -1,4 +1,4 @@
-package com.rolandsall.async;
+package com.rolandsall.producer.async;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.RecordMetadata;

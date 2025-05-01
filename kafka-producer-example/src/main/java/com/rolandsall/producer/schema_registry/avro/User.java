@@ -3,11 +3,9 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.rolandsall.schema_registry.avro;
+package com.rolandsall.producer.schema_registry.avro;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
-import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
@@ -180,8 +178,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
    * Creates a new User RecordBuilder.
    * @return A new User RecordBuilder
    */
-  public static com.rolandsall.schema_registry.avro.User.Builder newBuilder() {
-    return new com.rolandsall.schema_registry.avro.User.Builder();
+  public static User.Builder newBuilder() {
+    return new User.Builder();
   }
 
   /**
@@ -189,11 +187,11 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
    * @param other The existing builder to copy.
    * @return A new User RecordBuilder
    */
-  public static com.rolandsall.schema_registry.avro.User.Builder newBuilder(com.rolandsall.schema_registry.avro.User.Builder other) {
+  public static User.Builder newBuilder(User.Builder other) {
     if (other == null) {
-      return new com.rolandsall.schema_registry.avro.User.Builder();
+      return new User.Builder();
     } else {
-      return new com.rolandsall.schema_registry.avro.User.Builder(other);
+      return new User.Builder(other);
     }
   }
 
@@ -202,11 +200,11 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
    * @param other The existing instance to copy.
    * @return A new User RecordBuilder
    */
-  public static com.rolandsall.schema_registry.avro.User.Builder newBuilder(com.rolandsall.schema_registry.avro.User other) {
+  public static User.Builder newBuilder(User other) {
     if (other == null) {
-      return new com.rolandsall.schema_registry.avro.User.Builder();
+      return new User.Builder();
     } else {
-      return new com.rolandsall.schema_registry.avro.User.Builder(other);
+      return new User.Builder(other);
     }
   }
 
@@ -230,7 +228,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.rolandsall.schema_registry.avro.User.Builder other) {
+    private Builder(User.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.name)) {
         this.name = data().deepCopy(fields()[0].schema(), other.name);
@@ -250,7 +248,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
      * Creates a Builder by copying an existing User instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.rolandsall.schema_registry.avro.User other) {
+    private Builder(User other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.name)) {
         this.name = data().deepCopy(fields()[0].schema(), other.name);
@@ -280,7 +278,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'name'.
       * @return This builder.
       */
-    public com.rolandsall.schema_registry.avro.User.Builder setName(java.lang.String value) {
+    public User.Builder setName(java.lang.String value) {
       validate(fields()[0], value);
       this.name = value;
       fieldSetFlags()[0] = true;
@@ -300,7 +298,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * Clears the value of the 'name' field.
       * @return This builder.
       */
-    public com.rolandsall.schema_registry.avro.User.Builder clearName() {
+    public User.Builder clearName() {
       name = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -320,7 +318,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'age'.
       * @return This builder.
       */
-    public com.rolandsall.schema_registry.avro.User.Builder setAge(java.lang.Integer value) {
+    public User.Builder setAge(java.lang.Integer value) {
       validate(fields()[1], value);
       this.age = value;
       fieldSetFlags()[1] = true;
@@ -340,7 +338,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * Clears the value of the 'age' field.
       * @return This builder.
       */
-    public com.rolandsall.schema_registry.avro.User.Builder clearAge() {
+    public User.Builder clearAge() {
       age = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -360,7 +358,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public com.rolandsall.schema_registry.avro.User.Builder setEmail(java.lang.String value) {
+    public User.Builder setEmail(java.lang.String value) {
       validate(fields()[2], value);
       this.email = value;
       fieldSetFlags()[2] = true;
@@ -380,7 +378,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * Clears the value of the 'email' field.
       * @return This builder.
       */
-    public com.rolandsall.schema_registry.avro.User.Builder clearEmail() {
+    public User.Builder clearEmail() {
       email = null;
       fieldSetFlags()[2] = false;
       return this;

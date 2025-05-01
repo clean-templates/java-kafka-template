@@ -1,6 +1,6 @@
-package com.rolandsall.schema_registry;
+package com.rolandsall.producer.schema_registry;
 
-import com.rolandsall.schema_registry.avro.User;
+import com.rolandsall.producer.schema_registry.avro.User;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
