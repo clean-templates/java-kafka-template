@@ -1,4 +1,4 @@
-package com.rolandsall.producer.sync;
+package com.rolandsall.examples.producer.producer_configuration;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
@@ -8,13 +8,14 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.KafkaFuture;
+import org.apache.kafka.common.PartitionInfo;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class SynchronousProducer {
+public class ProducerConfiguration {
 
     private static final String BOOTSTRAP_SERVERS = "localhost:19092";
     private static final String TOPIC_NAME = "example-topic";
@@ -30,8 +31,23 @@ public class SynchronousProducer {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, "MY_PRODUCER_CONFIG_APP");
+        props.put(ProducerConfig.ACKS_CONFIG, "all"); // 0, 1
+
+
+        props.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 1000);
+        props.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 30000);
+        props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 10000);
+        props.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 5000);
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 1000);
+        props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
+        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+
+
         try (KafkaProducer<String, String> producer = new KafkaProducer<>(props)) {
 
+            List<PartitionInfo> partitionInfos = producer.partitionsFor(TOPIC_NAME);
+            System.out.println("Partition infos: " + partitionInfos);
             // Send 5 messages
             for (int i = 0; i < 5; i++) {
                 String key = "key-" + i;
@@ -39,7 +55,6 @@ public class SynchronousProducer {
 
                 ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, key, value);
 
-                // Synchronous send for simplicity
                 try {
                     RecordMetadata metadata = producer.send(record).get();
                     System.out.printf("Message sent to partition %d with offset %d%n",

@@ -1,4 +1,4 @@
-package com.rolandsall.consumer;
+package com.rolandsall.examples.consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

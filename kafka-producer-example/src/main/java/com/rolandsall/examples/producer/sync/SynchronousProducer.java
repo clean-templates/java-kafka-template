@@ -1,4 +1,4 @@
-package com.rolandsall.producer.async;
+package com.rolandsall.examples.producer.sync;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
@@ -6,6 +6,7 @@ import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.KafkaFuture;
 import org.apache.kafka.common.serialization.StringSerializer;
 
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class AsynchronousProducer {
+public class SynchronousProducer {
 
     private static final String BOOTSTRAP_SERVERS = "localhost:19092";
     private static final String TOPIC_NAME = "example-topic";
@@ -39,7 +40,13 @@ public class AsynchronousProducer {
                 ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, key, value);
 
                 // Synchronous send for simplicity
-                    producer.send(record, new DemoProduceCallback());
+                try {
+                    RecordMetadata metadata = producer.send(record).get();
+                    System.out.printf("Message sent to partition %d with offset %d%n",
+                            metadata.partition(), metadata.offset());
+                } catch (InterruptedException | ExecutionException e) {
+                    System.err.println("Error sending message: " + e.getMessage());
+                }
             }
             System.out.println("All messages sent successfully");
         }
