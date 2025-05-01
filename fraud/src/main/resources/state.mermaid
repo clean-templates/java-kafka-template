@@ -1,0 +1,28 @@
+flowchart TD
+    A[Transaction Producer] --> B[Kafka Topic: transactions]
+    B --> C[Kafka Streams Application]
+
+
+    subgraph "Fraud Detection Processor"
+        C --> D{High Value Transaction?\n>$1000}
+        D -->|No| E[Skip Processing]
+        D -->|Yes| F[Retrieve User Activity\nfrom State Store]
+        F --> G[Update User Activity\nAdd Transaction]
+        G --> H[Save Updated Activity\nto State Store]
+        H --> I{Is High Risk Activity?\n>3 transactions OR\n>$5000 total}
+        I -->|No| J[No Alert Generated]
+        I -->|Yes| K[Generate Fraud Alert]
+        K --> L[Send to Alerts Topic]
+    end
+    
+    M[(State Store:\nfraud-detector-state)] -.-> F
+    H -.-> M
+    
+    L --> N[Kafka Topic: fraud-alerts]
+    N --> O[Alert Consumer]
+    
+    style M fill:#000,stroke:#333,stroke-width:2px
+    style C fill:#000,stroke:#333,stroke-width:1px
+    style K fill:#000,stroke:#333,stroke-width:1px
+    style I fill:#0,stroke:#333,stroke-width:1px
+    style D fill:#0,stroke:#333,stroke-width:1px
