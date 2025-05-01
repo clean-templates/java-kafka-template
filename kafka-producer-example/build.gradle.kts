@@ -25,6 +25,7 @@ tasks.register("generateAvro", GenerateAvroJavaTask::class) {
 
 dependencies {
     implementation("org.apache.kafka:kafka-clients:3.5.1")
+    implementation("org.apache.kafka:kafka-streams:3.5.1")
 
     implementation("io.confluent:kafka-avro-serializer:7.2.5") {
         exclude(group = "org.slf4j", module = "slf4j-log4j12")
