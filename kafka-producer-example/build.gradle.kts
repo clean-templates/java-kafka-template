@@ -24,14 +24,21 @@ tasks.register("generateAvro", GenerateAvroJavaTask::class) {
 }
 
 dependencies {
-    implementation("org.apache.kafka:kafka-clients:3.5.1")
-    implementation("org.apache.kafka:kafka-streams:3.5.1")
+    // Use consistent versions for Kafka components
+    implementation("org.apache.kafka:kafka-clients:3.4.0")
+    implementation("org.apache.kafka:kafka-streams:3.4.0")
+
+    // Add SLF4J implementation
+    implementation("org.slf4j:slf4j-api:1.7.36")
+    implementation("org.slf4j:slf4j-simple:1.7.36")
 
     implementation("io.confluent:kafka-avro-serializer:7.2.5") {
         exclude(group = "org.slf4j", module = "slf4j-log4j12")
         exclude(group = "log4j", module = "log4j")
         exclude(group = "io.swagger", module = "swagger-annotations")
         exclude(group = "io.swagger", module = "swagger-core")
+        exclude(group = "org.apache.kafka", module = "kafka-clients")
+        exclude(group = "org.apache.kafka", module = "kafka-streams")
     }
     implementation("org.apache.avro:avro:1.11.1")
 
